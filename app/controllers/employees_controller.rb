@@ -13,21 +13,23 @@ class EmployeesController < ApplicationController
 
   def create
     @division = Division.find(params[:division_id])
-    @employee = Employee.new(employee_params)
+    @employee = @division.employees.new(employee_params)
     if @employee.save
-      redirect_to divison_path(@division)
+      redirect_to division_path(@division)
     else
       render :new
     end
   end
 
   def edit
+    @division = Division.find(params[:division_id])
     @employee = Employee.find(params[:id])
     render :edit
   end
 
   def show
     @employee = Employee.find(params[:id])
+    @division = Division.find(params[:division_id])
     render :show
   end
 
@@ -35,21 +37,20 @@ class EmployeesController < ApplicationController
     @division = Division.find(params[:division_id])
     @employee = Employee.find(params[:id])
     if @employee.update(employee_params)
-      redirect_to divison_path(@division)
+      redirect_to division_path(@division)
     else
       render :edit
     end
   end
 
   def destroy
-    @division = Division.find(params[:division_id])
     @employee = Employee.find(params[:id])
     @employee.destroy
-    redirect_to divison_path(@division)
+    redirect_to division_path(@employee.division)
   end
 
   private
     def employee_params
-      params.require(:employee).permit(:name)
+      params.require(:employee).permit(:name, :search)
     end
 end

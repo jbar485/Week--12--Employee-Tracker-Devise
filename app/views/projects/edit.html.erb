@@ -1,0 +1,18 @@
+<h3>Edit <%= @project.name %></h3>
+
+<%= render "layouts/project_form" %>
+
+<h3> Add an Employee </h3>
+
+<% if @employees.any? %>
+<form>
+  <% @employees.each do |employee| %>
+  <input type="radio" name="employee" value="<%= employee.id %>">
+  <label for="employee" ><%= employee.name %></label><br>
+  <% end %>
+  <button type="submit" name="button">Add Employee</button>
+</form>
+
+<% else %>
+<p>There are no employees yet.</p>
+<% end %>

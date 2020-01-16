@@ -8,4 +8,6 @@ describe Employee do
     employee = Employee.create({name: "marketing"})
     expect(employee.name()).to(eq("Marketing"))
   end
+
+  it { should have_and_belong_to_many :projects }
 end

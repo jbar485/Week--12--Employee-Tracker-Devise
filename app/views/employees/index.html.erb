@@ -1,0 +1,14 @@
+<h1>Employees</h1>
+
+<% if @employees.any? %>
+  <% @employees.each do |employee| %>
+    <p><%= link_to employee.name, employee_path(employee) %></p>
+  <% end %>
+<% else %>
+  <p>There are no employees yet.</p>
+<% end %>
+
+
+
+
+<p><%= link_to "Divisions", divisions_path %></p>
